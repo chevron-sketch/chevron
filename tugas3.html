@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Googcep</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        .logo{
+            font-size:60px;
+            font-weight:600;
+            letter-spacing:-2px;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <div class="max-w-2xl mx-auto mt-10 p-6 bg-white rounded-xl shadow-lg">
+
+        <!-- Logo -->
+        <h1 class="logo text-center mb-6">
+            <span style="color:#4285F4">G</span>
+            <span style="color:#EA4335">o</span>
+            <span style="color:#FBBC05">o</span>
+            <span style="color:#4285F4">g</span>
+            <span style="color:#34A853">c</span>
+            <span style="color:#EA4335">e</span>
+            <span style="color:#4285F4">p</span>
+        </h1>
+
+        <!-- Input -->
+        <div class="flex gap-2 mb-6">
+            <input
+                type="text"
+                id="todo-input"
+                placeholder="Search Googcep or type a URL"
+                class="flex-1 border border-gray-300 rounded px-4 py-2"
+            >
+
+            <button
+                id="add-btn"
+                class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                Add
+            </button>
+        </div>
+
+        <!-- List -->
+        <ul id="todo-list" class="space-y-2"></ul>
+
+    </div>
+
+    <script>
+        const input = document.getElementById("todo-input");
+        const addBtn = document.getElementById("add-btn");
+        const todoList = document.getElementById("todo-list");
+
+        addBtn.addEventListener("click", addTodo);
+
+        input.addEventListener("keypress", function(e){
+            if(e.key === "Enter"){
+                addTodo();
+            }
+        });
+
+        function addTodo(){
+            const text = input.value.trim();
+
+            if(text === "") return;
+
+            const li = document.createElement("li");
+
+            li.className =
+                "flex justify-between items-center bg-gray-100 p-3 rounded";
+
+            li.innerHTML = `
+                <span>${text}</span>
+                <button class="delete-btn bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">
+                    Hapus
+                </button>
+            `;
+
+            li.querySelector(".delete-btn").addEventListener("click", function(){
+                li.remove();
+            });
+
+            todoList.appendChild(li);
+
+            input.value = "";
+        }
+    </script>
+
+</body>
+</html>
